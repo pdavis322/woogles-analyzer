@@ -1,6 +1,6 @@
 import requests
 from typing import cast
-from .woogles_types import Player, GameInfo
+from woogles_types import Player, GameInfo
 
 username = 'jcv71'
 num_games = 2
@@ -16,9 +16,20 @@ recent_games = requests.post(BASE_URL + '/game_service.GameMetadataService/GetRe
                                  'offset': 0
                              })
 
-game_ids = [game['game_id'] for game in recent_games.json()['game_info']]
+game_infos = cast(list[GameInfo], recent_games.json()['game_info'])
+
+
+for game in game_infos:
+    print(game['game_id'])
+    r = requests.post(BASE_URL + '/game_service.GameMetadataService/GetGameHistory',
+                      headers={'Content-Type': 'application/json', 'X-Api-Key': API_KEY}, 
+                      json={
+                          'game_id': game['game_id']
+                      })
+    print(r.json())
+
+
     
-print(game_ids)
 
 
 
