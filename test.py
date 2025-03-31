@@ -6,7 +6,7 @@ username = 'jcv71'
 num_games = 2
 
 BASE_URL = 'https://woogles.io/api'
-API_KEY = '6Mcooc5xJ9Z9UXCHGYubohmhAb9tkm89PqnY9Eu5JjBB'
+API_KEY = ''
 
 recent_games = requests.post(BASE_URL + '/game_service.GameMetadataService/GetRecentGames', 
                              headers={'Content-Type': 'application/json', 'X-Api-Key': API_KEY}, 
